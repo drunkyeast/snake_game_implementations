@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>贪吃蛇 - Web版</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div id="gameContainer">
+        <div id="score">分数: 0</div>
+        <canvas id="gameCanvas" width="400" height="400"></canvas>
+        <div id="gameStatus">按空格键开始游戏</div>
+        <div id="controls">
+            <button onclick="startGame()">开始游戏</button>
+            <button onclick="pauseGame()">暂停</button>
+        </div>
+    </div>
+    <script src="js/game.js"></script>
+</body>
+
+</html>

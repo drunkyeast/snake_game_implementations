@@ -63,15 +63,22 @@ python3 -m http.server 8000
 
 **GitHub 推送连接超时 (端口 443)**
 
-在尝试通过 HTTPS (默认使用 443 端口) 推送代码到 GitHub 时，可能遇到连接超时问题。这通常是由于本地网络环境（如防火墙或代理）阻止了对 GitHub 443 端口的访问。
+GitHub 支持两种主要的连接协议：
+- **HTTPS**: 默认使用 **443 端口**。
+- **SSH**: 默认使用 **22 端口**。
+
+你在尝试通过 HTTPS (默认使用 443 端口) 推送代码到 GitHub 时，可能遇到连接超时问题。这通常是由于本地网络环境（如防火墙或代理）阻止了对 GitHub 443 端口的访问。**在中国大陆等地区，长城防火墙或其他网络限制可能对 443 端口的 HTTPS 连接进行干扰或屏蔽，而 SSH 使用的 22 端口则通常相对畅通。**
+
+当你遇到 443 端口连接超时的问题时，即使在 Cursor 中登录了 GitHub 账户，终端中的 `git` 命令也可能无法正常工作，因为它依赖底层的网络连接。
 
 **解决方案:**
 
-测试网络对 22 端口的连通性 (`curl -v telnet://github.com:22`)。如果 22 端口可达，可以切换到 SSH 协议进行代码推送。这需要：
-1.  生成 SSH 密钥对 (`ssh-keygen`)。
-2.  将公钥添加到你的 GitHub 账户设置中。
-3.  将本地仓库的远程 URL 修改为 SSH 格式 (`git remote set-url origin git@github.com:drunkyeast/snake_game_implementations.git`)。
-4.  然后使用 `git push` 命令推送到 GitHub。
+建议优先使用 SSH 协议进行 Git 操作，尤其在遇到 HTTPS 连接问题时。这需要：
+1.  测试网络对 22 端口的连通性 (`curl -v telnet://github.com:22`)。如果 22 端口可达，可以切换到 SSH 协议进行代码推送。
+2.  生成 SSH 密钥对 (`ssh-keygen`)。
+3.  将公钥添加到你的 GitHub 账户设置中。
+4.  将本地仓库的远程 URL 从 HTTPS 格式 (`https://github.com/your_username/repo_name.git`) 修改为 SSH 格式 (`git remote set-url origin git@github.com:drunkyeast/snake_game_implementations.git`)。
+5.  然后使用 `git push` 命令推送到 GitHub。
 
 ## 未来展望
 

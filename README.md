@@ -59,6 +59,20 @@ python3 -m http.server 8000
 ```
 2. 在浏览器中访问：`http://localhost:8000`
 
+## 故障排除
+
+**GitHub 推送连接超时 (端口 443)**
+
+在尝试通过 HTTPS (默认使用 443 端口) 推送代码到 GitHub 时，可能遇到连接超时问题。这通常是由于本地网络环境（如防火墙或代理）阻止了对 GitHub 443 端口的访问。
+
+**解决方案:**
+
+测试网络对 22 端口的连通性 (`curl -v telnet://github.com:22`)。如果 22 端口可达，可以切换到 SSH 协议进行代码推送。这需要：
+1.  生成 SSH 密钥对 (`ssh-keygen`)。
+2.  将公钥添加到你的 GitHub 账户设置中。
+3.  将本地仓库的远程 URL 修改为 SSH 格式 (`git remote set-url origin git@github.com:drunkyeast/snake_game_implementations.git`)。
+4.  然后使用 `git push` 命令推送到 GitHub。
+
 ## 未来展望
 
 贪吃蛇游戏的未来发展可以从以下几个方向考虑：
